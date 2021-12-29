@@ -1,0 +1,1720 @@
+Started by user Jenkins Admin
+[Pipeline] Start of Pipeline
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Created Pod: kubernetes jenkins/pytest-28-t0m7k-ffv8c-s645q
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Scheduled] Successfully assigned jenkins/pytest-28-t0m7k-ffv8c-s645q to docker-desktop
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Pulled] Container image "testenv:latest" already present on machine
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Created] Created container test
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Started] Started container test
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Pulled] Container image "jenkins/inbound-agent:4.3-4-jdk11" already present on machine
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Created] Created container jnlp
+[Normal][jenkins/pytest-28-t0m7k-ffv8c-s645q][Started] Started container jnlp
+Agent pytest-28-t0m7k-ffv8c-s645q is provisioned from template Pytest_28-t0m7k-ffv8c
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    buildUrl: "http://jenkins.jenkins.svc.cluster.local:32000/job/Pytest/28/"
+    runUrl: "job/Pytest/28/"
+  labels:
+    jenkins/jenkins-jenkins-agent: "true"
+    jenkins/label-digest: "6d3414902148eda0d36c662dc1c5f768e4f5e5c9"
+    jenkins/label: "Pytest_28-t0m7k"
+  name: "pytest-28-t0m7k-ffv8c-s645q"
+spec:
+  containers:
+  - command:
+    - "cat"
+    image: "testenv:latest"
+    imagePullPolicy: "Never"
+    name: "test"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-agent.jenkins.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "pytest-28-t0m7k-ffv8c-s645q"
+    - name: "JENKINS_NAME"
+      value: "pytest-28-t0m7k-ffv8c-s645q"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins.svc.cluster.local:32000/"
+    image: "jenkins/inbound-agent:4.3-4-jdk11"
+    name: "jnlp"
+    resources:
+      limits: {}
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  volumes:
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on pytest-28-t0m7k-ffv8c-s645q in /home/jenkins/agent/workspace/Pytest
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout github repo)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] checkout
+WARNING: Unknown parameter(s) found for class type 'hudson.plugins.git.GitSCM': credentialsId
+The recommended git tool is: NONE
+No credentials specified
+Warning: JENKINS-30600: special launcher org.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator$1@5546a9a0; decorates RemoteLauncher[hudson.remoting.Channel@3e7cddef:JNLP4-connect connection from 10.1.1.90/10.1.1.90:43606] will be ignored (a typical symptom is the Git executable not being run inside a designated container)
+Cloning the remote Git repository
+Cloning repository https://github.com/KoniAnastasia/pytest
+ > git init /home/jenkins/agent/workspace/Pytest # timeout=10
+Fetching upstream changes from https://github.com/KoniAnastasia/pytest
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+ > git fetch --tags --force --progress -- https://github.com/KoniAnastasia/pytest +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 09c0bee288e65a070d6f8e1fb7213d28454477dd (refs/remotes/origin/main)
+ > git config remote.origin.url https://github.com/KoniAnastasia/pytest # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 09c0bee288e65a070d6f8e1fb7213d28454477dd # timeout=10
+Commit message: "Merge pull request #9444 from pytest-dev/update-plugin-list/patch-443aa0219"
+ > git rev-list --no-walk 09c0bee288e65a070d6f8e1fb7213d28454477dd # timeout=10
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run tests)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ cd /home/jenkins/agent/workspace/Pytest
+[Pipeline] sh
++ pip3 install git+https://github.com/pytest-dev/pytest
+Collecting git+https://github.com/pytest-dev/pytest
+  Cloning https://github.com/pytest-dev/pytest to /tmp/pip-req-build-wiw9k2i5
+  Running command git clone -q https://github.com/pytest-dev/pytest /tmp/pip-req-build-wiw9k2i5
+  Resolved https://github.com/pytest-dev/pytest to commit 79dbd19780f20596db7863d4b539df60dca000f8
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Requirement already satisfied: py>=1.8.2 in /usr/local/lib/python3.10/site-packages (from pytest==7.1.0.dev70+g79dbd1978) (1.11.0)
+Requirement already satisfied: attrs>=19.2.0 in /usr/local/lib/python3.10/site-packages (from pytest==7.1.0.dev70+g79dbd1978) (21.2.0)
+Requirement already satisfied: packaging in /usr/local/lib/python3.10/site-packages (from pytest==7.1.0.dev70+g79dbd1978) (21.3)
+Collecting tomli>=1.0.0
+  Using cached tomli-2.0.0-py3-none-any.whl (12 kB)
+Requirement already satisfied: pluggy<2.0,>=0.12 in /usr/local/lib/python3.10/site-packages (from pytest==7.1.0.dev70+g79dbd1978) (1.0.0)
+Requirement already satisfied: iniconfig in /usr/local/lib/python3.10/site-packages (from pytest==7.1.0.dev70+g79dbd1978) (1.1.1)
+Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.10/site-packages (from packaging->pytest==7.1.0.dev70+g79dbd1978) (3.0.6)
+Building wheels for collected packages: pytest
+  Building wheel for pytest (PEP 517): started
+  Building wheel for pytest (PEP 517): finished with status 'done'
+  Created wheel for pytest: filename=pytest-7.1.0.dev70+g79dbd1978-py3-none-any.whl size=295230 sha256=a80e5129754af788eb5ca04b6d6a627ad11d70a283371c11d2a357c6c8a7e5a2
+  Stored in directory: /tmp/pip-ephem-wheel-cache-_wkucuuu/wheels/b6/f8/db/0fe8f0c3c764ecdb0058b463f59721bf6e87b23dbe749428a3
+Successfully built pytest
+Installing collected packages: tomli, pytest
+  Attempting uninstall: pytest
+    Found existing installation: pytest 6.2.5
+    Uninstalling pytest-6.2.5:
+      Successfully uninstalled pytest-6.2.5
+Successfully installed pytest-7.1.0.dev70+g79dbd1978 tomli-2.0.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[Pipeline] sh
++ pip3 install hypothesis
+Collecting hypothesis
+  Downloading hypothesis-6.32.1-py3-none-any.whl (375 kB)
+Collecting sortedcontainers<3.0.0,>=2.1.0
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Requirement already satisfied: attrs>=19.2.0 in /usr/local/lib/python3.10/site-packages (from hypothesis) (21.2.0)
+Installing collected packages: sortedcontainers, hypothesis
+Successfully installed hypothesis-6.32.1 sortedcontainers-2.4.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[Pipeline] sh
++ pip3 install xmlschema
+Collecting xmlschema
+  Downloading xmlschema-1.9.2-py3-none-any.whl (273 kB)
+Collecting elementpath<3.0.0,>=2.4.0
+  Downloading elementpath-2.4.0-py3-none-any.whl (163 kB)
+Installing collected packages: elementpath, xmlschema
+Successfully installed elementpath-2.4.0 xmlschema-1.9.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[Pipeline] sh
++ python3 -m pytest
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /home/jenkins/agent/workspace/Pytest, configfile: pyproject.toml, testpaths: testing
+plugins: hypothesis-6.32.1
+collected 3131 items
+
+testing/acceptance_test.py .....                                         [  0%]
+testing/deprecated_test.py .....                                         [  0%]
+testing/test_argcomplete.py ..                                           [  0%]
+testing/test_assertion.py .......F..FFF......F........................FF [  1%]
+..................                                                       [  2%]
+testing/test_assertrewrite.py .......................................... [  3%]
+..                                                                       [  3%]
+testing/test_capture.py ................................................ [  5%]
+........s....s..                                                         [  5%]
+testing/test_collection.py .                                             [  5%]
+testing/test_compat.py ...........                                       [  6%]
+testing/test_config.py ................................................. [  7%]
+...                                                                      [  7%]
+testing/test_conftest.py ...........                                     [  8%]
+testing/test_debugging.py ..                                             [  8%]
+testing/test_doctest.py .............                                    [  8%]
+testing/test_entry_points.py .                                           [  8%]
+testing/test_faulthandler.py ...                                         [  8%]
+testing/test_findpaths.py ..............                                 [  9%]
+testing/test_helpconfig.py .                                             [  9%]
+testing/test_junitxml.py ....                                            [  9%]
+testing/test_legacypath.py ....                                          [  9%]
+testing/test_main.py .....                                               [  9%]
+testing/test_mark.py .............                                       [ 10%]
+testing/test_mark_expression.py ........................................ [ 11%]
+............................................                             [ 12%]
+testing/test_monkeypatch.py ............................s..              [ 13%]
+testing/test_nodes.py ..............                                     [ 14%]
+testing/test_nose.py ss                                                  [ 14%]
+testing/test_parseopt.py ............................                    [ 15%]
+testing/test_pastebin.py ....                                            [ 15%]
+testing/test_pathlib.py ............................................s... [ 16%]
+..                                                                       [ 16%]
+testing/test_pluginmanager.py .........                                  [ 17%]
+testing/test_pytester.py .....................                           [ 17%]
+testing/test_recwarn.py ........................................         [ 19%]
+testing/test_runner.py ..............                                    [ 19%]
+testing/test_scope.py ....                                               [ 19%]
+testing/test_skipping.py .                                               [ 19%]
+testing/test_stash.py .                                                  [ 19%]
+testing/test_terminal.py .......................................         [ 21%]
+testing/test_tmpdir.py ...s..............                                [ 21%]
+testing/test_warning_types.py ............                               [ 22%]
+testing/test_warnings.py .                                               [ 22%]
+testing/code/test_code.py .................                              [ 22%]
+testing/code/test_excinfo.py ...............s.......s................... [ 24%]
+........................................................................ [ 26%]
+...........                                                              [ 26%]
+testing/code/test_source.py ............................................ [ 28%]
+...........                                                              [ 28%]
+testing/freeze/tests/test_trivial.py ..                                  [ 28%]
+testing/io/test_saferepr.py ............                                 [ 28%]
+testing/io/test_terminalwriter.py ...................................... [ 30%]
+...F...                                                                  [ 30%]
+testing/io/test_wcwidth.py .................                             [ 30%]
+testing/logging/test_fixture.py ........                                 [ 31%]
+testing/logging/test_formatter.py ....                                   [ 31%]
+testing/logging/test_reporting.py ..                                     [ 31%]
+testing/python/approx.py sss..sssss..................................... [ 32%]
+ssssss................ss.                                                [ 33%]
+testing/python/collect.py ..                                             [ 33%]
+testing/python/fixtures.py ..........                                    [ 33%]
+testing/python/integration.py ....                                       [ 34%]
+testing/python/metafunc.py .........................................     [ 35%]
+testing/python/raises.py .....................                           [ 36%]
+testing/freeze/tests/test_doctest.txt .                                  [ 36%]
+testing/acceptance_test.py ............................................. [ 37%]
+.....x...................                                                [ 38%]
+testing/deprecated_test.py ............                                  [ 38%]
+testing/test_assertion.py ...FFF......F.....................             [ 39%]
+testing/test_assertrewrite.py .......................................... [ 41%]
+..                                                                       [ 41%]
+testing/test_cacheprovider.py ...ss..................................... [ 42%]
+.........                                                                [ 42%]
+testing/test_capture.py ......x........................s...........      [ 44%]
+testing/test_collection.py ...........................x................. [ 45%]
+...................s................                                     [ 46%]
+testing/test_compat.py ..                                                [ 46%]
+testing/test_config.py ...........x..................................... [ 48%]
+........................................................................ [ 50%]
+...                                                                      [ 50%]
+testing/test_conftest.py ............s.............................      [ 52%]
+testing/test_debugging.py ............                                   [ 52%]
+testing/test_doctest.py ................................................ [ 54%]
+.............x........................................................s. [ 56%]
+                                                                         [ 56%]
+testing/test_error_diffs.py ............                                 [ 56%]
+testing/test_faulthandler.py ...                                         [ 56%]
+testing/test_helpconfig.py ........                                      [ 57%]
+testing/test_junitxml.py ............................................... [ 58%]
+..................................................s...s................. [ 60%]
+.....                                                                    [ 61%]
+testing/test_legacypath.py ..........                                    [ 61%]
+testing/test_link_resolve.py .                                           [ 61%]
+testing/test_main.py ............                                        [ 61%]
+testing/test_mark.py ................................................... [ 63%]
+........x................                                                [ 64%]
+testing/test_monkeypatch.py ....                                         [ 64%]
+testing/test_nodes.py ....                                               [ 64%]
+testing/test_nose.py sssssssssssssssssss                                 [ 65%]
+testing/test_parseopt.py s                                               [ 65%]
+testing/test_pastebin.py ...                                             [ 65%]
+testing/test_pluginmanager.py ................                           [ 65%]
+testing/test_pytester.py x.........................                      [ 66%]
+testing/test_pythonpath.py .....                                         [ 66%]
+testing/test_recwarn.py ..                                               [ 66%]
+testing/test_reports.py .................                                [ 67%]
+testing/test_runner.py ......................x.....................      [ 68%]
+testing/test_runner_xunit.py .............                               [ 69%]
+testing/test_session.py ........................                         [ 69%]
+testing/test_setuponly.py ..........................                     [ 70%]
+testing/test_setupplan.py ...                                            [ 70%]
+testing/test_skipping.py ............................................... [ 72%]
+............................................                             [ 73%]
+testing/test_stepwise.py ............                                    [ 74%]
+testing/test_terminal.py ............................................s.. [ 75%]
+.........F.......................................sss.....s...FFF         [ 77%]
+testing/test_threadexception.py ....                                     [ 77%]
+testing/test_tmpdir.py ................                                  [ 78%]
+testing/test_unittest.py ......................sssssss.................. [ 79%]
+.............s......                                                     [ 80%]
+testing/test_unraisableexception.py ....                                 [ 80%]
+testing/test_warning_types.py .                                          [ 80%]
+testing/test_warnings.py ...................sss........                  [ 81%]
+testing/code/test_excinfo.py ....                                        [ 81%]
+testing/examples/test_issue519.py .                                      [ 81%]
+testing/logging/test_fixture.py .......                                  [ 81%]
+testing/logging/test_reporting.py ...................................... [ 83%]
+                                                                         [ 83%]
+testing/python/approx.py .                                               [ 83%]
+testing/python/collect.py .............................................. [ 84%]
+.............................                                            [ 85%]
+testing/python/fixtures.py ............................................. [ 87%]
+..........................x............................................. [ 89%]
+.....................................................s..                 [ 91%]
+testing/python/integration.py ..s.sss........                            [ 91%]
+testing/python/metafunc.py ............................................. [ 93%]
+...............                                                          [ 93%]
+testing/python/raises.py ...                                             [ 93%]
+testing/python/show_fixtures_per_test.py ........                        [ 93%]
+testing/acceptance_test.py ....                                          [ 94%]
+testing/test_assertion.py ....F.......                                   [ 94%]
+testing/test_assertrewrite.py .........                                  [ 94%]
+testing/test_capture.py ........................                         [ 95%]
+testing/test_collection.py .                                             [ 95%]
+testing/test_compat.py .                                                 [ 95%]
+testing/test_config.py ..                                                [ 95%]
+testing/test_debugging.py sssssssssss.ssssssssssssssss.sss....ssss.sss   [ 96%]
+testing/test_faulthandler.py ..s.                                        [ 97%]
+testing/test_helpconfig.py ..                                            [ 97%]
+testing/test_meta.py ................................................... [ 98%]
+.............                                                            [ 99%]
+testing/test_pytester.py ....s                                           [ 99%]
+testing/test_reports.py .                                                [ 99%]
+testing/test_terminal.py ssFF                                            [ 99%]
+testing/test_unittest.py s.                                              [ 99%]
+testing/test_warnings.py .........                                       [ 99%]
+testing/python/collect.py .                                              [ 99%]
+testing/python/fixtures.py ..                                            [100%]
+
+=================================== FAILURES ===================================
+________________ TestAssert_reprcompare.test_bytes_diff_normal _________________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236bbcc790>
+
+    def test_bytes_diff_normal(self) -> None:
+        """Check special handling for bytes diff (#5260)"""
+        diff = callequal(b"spam", b"eggs")
+    
+>       assert diff == [
+            "b'spam' == b'eggs'",
+            "At index 0 diff: b's' != b'e'",
+            "Use -v to get the full diff",
+        ]
+E       assert ["b'spam' == ..., "+ b'spam'"] == ["b'spam' == ...he full diff']
+E         At index 2 diff: 'Full diff:' != 'Use -v to get the full diff'
+E         Left contains 2 more items, first extra item: "- b'eggs'"
+E         Full diff:
+E           [
+E            "b'spam' == b'eggs'",
+E            "At index 0 diff: b's' != b'e'",
+E         -  'Use -v to get the full diff',
+E         +  'Full diff:',
+E         +  "- b'eggs'",
+E         +  "+ b'spam'",
+E           ]
+
+testing/test_assertion.py:376: AssertionError
+____________ TestAssert_reprcompare.test_iterable_full_diff[lists] _____________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236bbcc5e0>
+left = [0, 1], right = [0, 2]
+expected = '\n                Full diff:\n                - [0, 2]\n                ?     ^\n                + [0, 1]\n                ?     ^\n            '
+
+    @pytest.mark.parametrize(
+        ["left", "right", "expected"],
+        [
+            pytest.param(
+                [0, 1],
+                [0, 2],
+                """
+                Full diff:
+                - [0, 2]
+                ?     ^
+                + [0, 1]
+                ?     ^
+            """,
+                id="lists",
+            ),
+            pytest.param(
+                {0: 1},
+                {0: 2},
+                """
+                Full diff:
+                - {0: 2}
+                ?     ^
+                + {0: 1}
+                ?     ^
+            """,
+                id="dicts",
+            ),
+            pytest.param(
+                {0, 1},
+                {0, 2},
+                """
+                Full diff:
+                - {0, 2}
+                ?     ^
+                + {0, 1}
+                ?     ^
+            """,
+                id="sets",
+            ),
+        ],
+    )
+    def test_iterable_full_diff(self, left, right, expected) -> None:
+        """Test the full diff assertion failure explanation.
+    
+        When verbose is False, then just a -v notice to get the diff is rendered,
+        when verbose is True, then ndiff of the pprint is returned.
+        """
+        expl = callequal(left, right, verbose=0)
+        assert expl is not None
+>       assert expl[-1] == "Use -v to get the full diff"
+E       AssertionError: assert '?     ^' == 'Use -v to get the full diff'
+E         - Use -v to get the full diff
+E         + ?     ^
+
+testing/test_assertion.py:447: AssertionError
+____________ TestAssert_reprcompare.test_iterable_full_diff[dicts] _____________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236c0501f0>
+left = {0: 1}, right = {0: 2}
+expected = '\n                Full diff:\n                - {0: 2}\n                ?     ^\n                + {0: 1}\n                ?     ^\n            '
+
+    @pytest.mark.parametrize(
+        ["left", "right", "expected"],
+        [
+            pytest.param(
+                [0, 1],
+                [0, 2],
+                """
+                Full diff:
+                - [0, 2]
+                ?     ^
+                + [0, 1]
+                ?     ^
+            """,
+                id="lists",
+            ),
+            pytest.param(
+                {0: 1},
+                {0: 2},
+                """
+                Full diff:
+                - {0: 2}
+                ?     ^
+                + {0: 1}
+                ?     ^
+            """,
+                id="dicts",
+            ),
+            pytest.param(
+                {0, 1},
+                {0, 2},
+                """
+                Full diff:
+                - {0, 2}
+                ?     ^
+                + {0, 1}
+                ?     ^
+            """,
+                id="sets",
+            ),
+        ],
+    )
+    def test_iterable_full_diff(self, left, right, expected) -> None:
+        """Test the full diff assertion failure explanation.
+    
+        When verbose is False, then just a -v notice to get the diff is rendered,
+        when verbose is True, then ndiff of the pprint is returned.
+        """
+        expl = callequal(left, right, verbose=0)
+        assert expl is not None
+>       assert expl[-1] == "Use -v to get the full diff"
+E       AssertionError: assert '?     ^' == 'Use -v to get the full diff'
+E         - Use -v to get the full diff
+E         + ?     ^
+
+testing/test_assertion.py:447: AssertionError
+_____________ TestAssert_reprcompare.test_iterable_full_diff[sets] _____________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236c050310>
+left = {0, 1}, right = {0, 2}
+expected = '\n                Full diff:\n                - {0, 2}\n                ?     ^\n                + {0, 1}\n                ?     ^\n            '
+
+    @pytest.mark.parametrize(
+        ["left", "right", "expected"],
+        [
+            pytest.param(
+                [0, 1],
+                [0, 2],
+                """
+                Full diff:
+                - [0, 2]
+                ?     ^
+                + [0, 1]
+                ?     ^
+            """,
+                id="lists",
+            ),
+            pytest.param(
+                {0: 1},
+                {0: 2},
+                """
+                Full diff:
+                - {0: 2}
+                ?     ^
+                + {0: 1}
+                ?     ^
+            """,
+                id="dicts",
+            ),
+            pytest.param(
+                {0, 1},
+                {0, 2},
+                """
+                Full diff:
+                - {0, 2}
+                ?     ^
+                + {0, 1}
+                ?     ^
+            """,
+                id="sets",
+            ),
+        ],
+    )
+    def test_iterable_full_diff(self, left, right, expected) -> None:
+        """Test the full diff assertion failure explanation.
+    
+        When verbose is False, then just a -v notice to get the diff is rendered,
+        when verbose is True, then ndiff of the pprint is returned.
+        """
+        expl = callequal(left, right, verbose=0)
+        assert expl is not None
+>       assert expl[-1] == "Use -v to get the full diff"
+E       AssertionError: assert '?     ^' == 'Use -v to get the full diff'
+E         - Use -v to get the full diff
+E         + ?     ^
+
+testing/test_assertion.py:447: AssertionError
+__________________ TestAssert_reprcompare.test_dict_omitting ___________________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236bbcc130>
+
+    def test_dict_omitting(self) -> None:
+        lines = callequal({"a": 0, "b": 1}, {"a": 1, "b": 1})
+        assert lines is not None
+        assert lines[1].startswith("Omitting 1 identical item")
+        assert "Common items" not in lines
+        for line in lines[1:]:
+>           assert "b" not in line
+E           assert 'b' not in "- {'a': 1, 'b': 1}"
+E             'b' is contained here:
+E               - {'a': 1, 'b': 1}
+E             ?             +
+
+testing/test_assertion.py:597: AssertionError
+______________ TestAssert_reprcompare_namedtuple.test_namedtuple _______________
+
+self = <test_assertion.TestAssert_reprcompare_namedtuple object at 0x7f236c053100>
+
+    def test_namedtuple(self) -> None:
+        NT = collections.namedtuple("NT", ["a", "b"])
+    
+        left = NT(1, "b")
+        right = NT(1, "c")
+    
+        lines = callequal(left, right)
+>       assert lines == [
+            "NT(a=1, b='b') == NT(a=1, b='c')",
+            "",
+            "Omitting 1 identical items, use -vv to show",
+            "Differing attributes:",
+            "['b']",
+            "",
+            "Drill down into differing attribute b:",
+            "  b: 'b' != 'c'",
+            "  - c",
+            "  + b",
+            "Use -v to get the full diff",
+        ]
+E       assert ["NT(a=1, b='...b']", '', ...] == ["NT(a=1, b='...b']", '', ...]
+E         At index 10 diff: 'Full diff:' != 'Use -v to get the full diff'
+E         Left contains 4 more items, first extra item: "- NT(a=1, b='c')"
+E         Full diff:
+E           [
+E            "NT(a=1, b='b') == NT(a=1, b='c')",
+E            '',
+E            'Omitting 1 identical items, use -vv to show',
+E            'Differing attributes:',
+E            "['b']",
+E            '',
+E            'Drill down into differing attribute b:',
+E            "  b: 'b' != 'c'",
+E            '  - c',
+E            '  + b',
+E         -  'Use -v to get the full diff',
+E         +  'Full diff:',
+E         +  "- NT(a=1, b='c')",
+E         +  '?            ^',
+E         +  "+ NT(a=1, b='b')",
+E         +  '?            ^',
+E           ]
+
+testing/test_assertion.py:1058: AssertionError
+__ TestAssert_reprcompare_namedtuple.test_comparing_two_different_namedtuple ___
+
+self = <test_assertion.TestAssert_reprcompare_namedtuple object at 0x7f236c053040>
+
+    def test_comparing_two_different_namedtuple(self) -> None:
+        NT1 = collections.namedtuple("NT1", ["a", "b"])
+        NT2 = collections.namedtuple("NT2", ["a", "b"])
+    
+        left = NT1(1, "b")
+        right = NT2(2, "b")
+    
+        lines = callequal(left, right)
+        # Because the types are different, uses the generic sequence matcher.
+>       assert lines == [
+            "NT1(a=1, b='b') == NT2(a=2, b='b')",
+            "At index 0 diff: 1 != 2",
+            "Use -v to get the full diff",
+        ]
+E       assert ["NT1(a=1, b=... b='b')", ...] == ["NT1(a=1, b=...he full diff']
+E         At index 2 diff: 'Full diff:' != 'Use -v to get the full diff'
+E         Left contains 4 more items, first extra item: "- NT2(a=2, b='b')"
+E         Full diff:
+E           [
+E            "NT1(a=1, b='b') == NT2(a=2, b='b')",
+E            'At index 0 diff: 1 != 2',
+E         -  'Use -v to get the full diff',
+E         +  'Full diff:',
+E         +  "- NT2(a=2, b='b')",
+E         +  '?   ^   ^',
+E         +  "+ NT1(a=1, b='b')",
+E         +  '?   ^   ^',
+E           ]
+
+testing/test_assertion.py:1081: AssertionError
+_____________ test_code_highlight[with markup and code_highlight] ______________
+
+has_markup = True, code_highlight = True
+expected = '{kw}assert{hl-reset} {number}0{hl-reset}\n'
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+
+    @pytest.mark.parametrize(
+        ("has_markup", "code_highlight", "expected"),
+        [
+            pytest.param(
+                True,
+                True,
+                "{kw}assert{hl-reset} {number}0{hl-reset}\n",
+                id="with markup and code_highlight",
+            ),
+            pytest.param(
+                True,
+                False,
+                "assert 0\n",
+                id="with markup but no code_highlight",
+            ),
+            pytest.param(
+                False,
+                True,
+                "assert 0\n",
+                id="without markup but with code_highlight",
+            ),
+            pytest.param(
+                False,
+                False,
+                "assert 0\n",
+                id="neither markup nor code_highlight",
+            ),
+        ],
+    )
+    def test_code_highlight(has_markup, code_highlight, expected, color_mapping):
+        f = io.StringIO()
+        tw = terminalwriter.TerminalWriter(f)
+        tw.hasmarkup = has_markup
+        tw.code_highlight = code_highlight
+        tw._write_source(["assert 0"])
+    
+>       assert f.getvalue().splitlines(keepends=True) == color_mapping.format([expected])
+E       AssertionError: assert ['assert 0\n'] == ['\x1b[94mass...[39;49;00m\n']
+E         At index 0 diff: 'assert 0\n' != '\x1b[94massert\x1b[39;49;00m \x1b[94m0\x1b[39;49;00m\n'
+E         Full diff:
+E         - ['\x1b[94massert\x1b[39;49;00m \x1b[94m0\x1b[39;49;00m\n']
+E         + ['assert 0\n']
+
+testing/io/test_terminalwriter.py:287: AssertionError
+______________ TestAssert_reprcompare.test_iterable_full_diff_ci _______________
+
+self = <test_assertion.TestAssert_reprcompare object at 0x7f236c050f70>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f236a3213c0>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_iterable_full_diff_ci0')>
+
+    def test_iterable_full_diff_ci(
+        self, monkeypatch: MonkeyPatch, pytester: Pytester
+    ) -> None:
+        pytester.makepyfile(
+            r"""
+            def test_full_diff():
+                left = [0, 1]
+                right = [0, 2]
+                assert left == right
+        """
+        )
+        monkeypatch.setenv("CI", "true")
+        result = pytester.runpytest()
+        result.stdout.fnmatch_lines(["E         Full diff:"])
+    
+        monkeypatch.delenv("CI", raising=False)
+        result = pytester.runpytest()
+>       result.stdout.fnmatch_lines(["E         Use -v to get the full diff"])
+E       Failed: nomatch: 'E         Use -v to get the full diff'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_iterable_full_diff_ci0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_iterable_full_diff_ci.py F                                          [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '________________________________ test_full_diff ________________________________'
+E           and: ''
+E           and: '    def test_full_diff():'
+E           and: '        left = [0, 1]'
+E           and: '        right = [0, 2]'
+E           and: '>       assert left == right'
+E           and: 'E       assert [0, 1] == [0, 2]'
+E           and: 'E         At index 1 diff: 1 != 2'
+E           and: 'E         Full diff:'
+E           and: 'E         - [0, 2]'
+E           and: 'E         ?     ^'
+E           and: 'E         + [0, 1]'
+E           and: 'E         ?     ^'
+E           and: ''
+E           and: 'test_iterable_full_diff_ci.py:4: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_iterable_full_diff_ci.py::test_full_diff - assert [0, 1] == [0, 2]'
+E           and: '============================== 1 failed in 0.01s ==============================='
+E       remains unmatched: 'E         Use -v to get the full diff'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_assertion.py:469: Failed
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_iterable_full_diff_ci0
+collected 1 item
+
+test_iterable_full_diff_ci.py F                                          [100%]
+
+=================================== FAILURES ===================================
+________________________________ test_full_diff ________________________________
+
+    def test_full_diff():
+        left = [0, 1]
+        right = [0, 2]
+>       assert left == right
+E       assert [0, 1] == [0, 2]
+E         At index 1 diff: 1 != 2
+E         Full diff:
+E         - [0, 2]
+E         ?     ^
+E         + [0, 1]
+E         ?     ^
+
+test_iterable_full_diff_ci.py:4: AssertionError
+=========================== short test summary info ============================
+FAILED test_iterable_full_diff_ci.py::test_full_diff - assert [0, 1] == [0, 2]
+============================== 1 failed in 0.01s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_iterable_full_diff_ci0
+collected 1 item
+
+test_iterable_full_diff_ci.py F                                          [100%]
+
+=================================== FAILURES ===================================
+________________________________ test_full_diff ________________________________
+
+    def test_full_diff():
+        left = [0, 1]
+        right = [0, 2]
+>       assert left == right
+E       assert [0, 1] == [0, 2]
+E         At index 1 diff: 1 != 2
+E         Full diff:
+E         - [0, 2]
+E         ?     ^
+E         + [0, 1]
+E         ?     ^
+
+test_iterable_full_diff_ci.py:4: AssertionError
+=========================== short test summary info ============================
+FAILED test_iterable_full_diff_ci.py::test_full_diff - assert [0, 1] == [0, 2]
+============================== 1 failed in 0.01s ===============================
+______________ TestAssert_reprcompare_dataclass.test_dataclasses _______________
+
+self = <test_assertion.TestAssert_reprcompare_dataclass object at 0x7f236bbcc160>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_dataclasses0')>
+
+    @pytest.mark.skipif(sys.version_info < (3, 7), reason="Dataclasses in Python3.7+")
+    def test_dataclasses(self, pytester: Pytester) -> None:
+        p = pytester.copy_example("dataclasses/test_compare_dataclasses.py")
+        result = pytester.runpytest(p)
+        result.assert_outcomes(failed=1, passed=0)
+>       result.stdout.fnmatch_lines(
+            [
+                "E         Omitting 1 identical items, use -vv to show",
+                "E         Differing attributes:",
+                "E         ['field_b']",
+                "E         ",
+                "E         Drill down into differing attribute field_b:",
+                "E           field_b: 'b' != 'c'...",
+                "E         ",
+                "E         ...Full output truncated (3 lines hidden), use '-vv' to show",
+            ],
+            consecutive=True,
+        )
+E       Failed: nomatch: 'E         Omitting 1 identical items, use -vv to show'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_dataclasses0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_compare_dataclasses.py F                                            [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '_______________________________ test_dataclasses _______________________________'
+E           and: ''
+E           and: '    def test_dataclasses() -> None:'
+E           and: '        @dataclass'
+E           and: '        class SimpleDataObject:'
+E           and: '            field_a: int = field()'
+E           and: '            field_b: str = field()'
+E           and: '    '
+E           and: '        left = SimpleDataObject(1, "b")'
+E           and: '        right = SimpleDataObject(1, "c")'
+E           and: '    '
+E           and: '>       assert left == right'
+E           and: "E       AssertionError: assert test_dataclas..., field_b='b') == test_dataclas..., field_b='c')"
+E           and: 'E         '
+E       exact match: 'E         Omitting 1 identical items, use -vv to show'
+E       exact match: 'E         Differing attributes:'
+E       exact match: "E         ['field_b']"
+E       exact match: 'E         '
+E       exact match: 'E         Drill down into differing attribute field_b:'
+E       no consecutive match: "E           field_b: 'b' != 'c'..."
+E          with: "E           field_b: 'b' != 'c'"
+
+/home/jenkins/agent/workspace/Pytest/testing/test_assertion.py:804: Failed
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_dataclasses0
+collected 1 item
+
+test_compare_dataclasses.py F                                            [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_dataclasses _______________________________
+
+    def test_dataclasses() -> None:
+        @dataclass
+        class SimpleDataObject:
+            field_a: int = field()
+            field_b: str = field()
+    
+        left = SimpleDataObject(1, "b")
+        right = SimpleDataObject(1, "c")
+    
+>       assert left == right
+E       AssertionError: assert test_dataclas..., field_b='b') == test_dataclas..., field_b='c')
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing attributes:
+E         ['field_b']
+E         
+E         Drill down into differing attribute field_b:
+E           field_b: 'b' != 'c'
+E           - c
+E           + b
+
+test_compare_dataclasses.py:14: AssertionError
+=========================== short test summary info ============================
+FAILED test_compare_dataclasses.py::test_dataclasses - AssertionError: assert...
+============================== 1 failed in 0.01s ===============================
+_________ TestAssert_reprcompare_dataclass.test_recursive_dataclasses __________
+
+self = <test_assertion.TestAssert_reprcompare_dataclass object at 0x7f236bbccb50>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_recursive_dataclasses0')>
+
+    @pytest.mark.skipif(sys.version_info < (3, 7), reason="Dataclasses in Python3.7+")
+    def test_recursive_dataclasses(self, pytester: Pytester) -> None:
+        p = pytester.copy_example("dataclasses/test_compare_recursive_dataclasses.py")
+        result = pytester.runpytest(p)
+        result.assert_outcomes(failed=1, passed=0)
+>       result.stdout.fnmatch_lines(
+            [
+                "E         Omitting 1 identical items, use -vv to show",
+                "E         Differing attributes:",
+                "E         ['g', 'h', 'j']",
+                "E         ",
+                "E         Drill down into differing attribute g:",
+                "E           g: S(a=10, b='ten') != S(a=20, b='xxx')...",
+                "E         ",
+                "E         ...Full output truncated (52 lines hidden), use '-vv' to show",
+            ],
+            consecutive=True,
+        )
+E       Failed: nomatch: 'E         Omitting 1 identical items, use -vv to show'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_recursive_dataclasses0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_compare_recursive_dataclasses.py F                                  [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '__________________________ test_recursive_dataclasses __________________________'
+E           and: ''
+E           and: '    def test_recursive_dataclasses():'
+E           and: '        left = C3('
+E           and: '            S(10, "ten"),'
+E           and: '            C2(C(S(1, "one"), S(2, "two")), S(2, "three")),'
+E           and: '            "equal",'
+E           and: '            "left",'
+E           and: '        )'
+E           and: '        right = C3('
+E           and: '            S(20, "xxx"),'
+E           and: '            C2(C(S(1, "one"), S(2, "yyy")), S(3, "three")),'
+E           and: '            "equal",'
+E           and: '            "right",'
+E           and: '        )'
+E           and: '    '
+E           and: '>       assert left == right'
+E           and: "E       AssertionError: assert C3(g=S(a=10, ...al', j='left') == C3(g=S(a=20, ...l', j='right')"
+E           and: 'E         '
+E       exact match: 'E         Omitting 1 identical items, use -vv to show'
+E       exact match: 'E         Differing attributes:'
+E       exact match: "E         ['g', 'h', 'j']"
+E       exact match: 'E         '
+E       exact match: 'E         Drill down into differing attribute g:'
+E       no consecutive match: "E           g: S(a=10, b='ten') != S(a=20, b='xxx')..."
+E          with: "E           g: S(a=10, b='ten') != S(a=20, b='xxx')"
+
+/home/jenkins/agent/workspace/Pytest/testing/test_assertion.py:823: Failed
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_recursive_dataclasses0
+collected 1 item
+
+test_compare_recursive_dataclasses.py F                                  [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_recursive_dataclasses __________________________
+
+    def test_recursive_dataclasses():
+        left = C3(
+            S(10, "ten"),
+            C2(C(S(1, "one"), S(2, "two")), S(2, "three")),
+            "equal",
+            "left",
+        )
+        right = C3(
+            S(20, "xxx"),
+            C2(C(S(1, "one"), S(2, "yyy")), S(3, "three")),
+            "equal",
+            "right",
+        )
+    
+>       assert left == right
+E       AssertionError: assert C3(g=S(a=10, ...al', j='left') == C3(g=S(a=20, ...l', j='right')
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing attributes:
+E         ['g', 'h', 'j']
+E         
+E         Drill down into differing attribute g:
+E           g: S(a=10, b='ten') != S(a=20, b='xxx')
+E           
+E           Differing attributes:
+E           ['a', 'b']
+E           
+E           Drill down into differing attribute a:
+E             a: 10 != 20
+E           
+E           Drill down into differing attribute b:
+E             b: 'ten' != 'xxx'
+E             - xxx
+E             + ten
+E         
+E         Drill down into differing attribute h:
+E           h: C2(e=C(c=S(a=1, b='one'), d=S(a=2, b='two')), f=S(a=2, b='three')) != C2(e=C(c=S(a=1, b='one'), d=S(a=2, b='yyy')), f=S(a=3, b='three'))
+E           
+E           Differing attributes:
+E           ['e', 'f']
+E           
+E           Drill down into differing attribute e:
+E             e: C(c=S(a=1, b='one'), d=S(a=2, b='two')) != C(c=S(a=1, b='one'), d=S(a=2, b='yyy'))
+E             
+E             Omitting 1 identical items, use -vv to show
+E             Differing attributes:
+E             ['d']
+E             
+E             Drill down into differing attribute d:
+E               d: S(a=2, b='two') != S(a=2, b='yyy')
+E               
+E               Omitting 1 identical items, use -vv to show
+E               Differing attributes:
+E               ['b']
+E               
+E               Drill down into differing attribute b:
+E                 b: 'two' != 'yyy'
+E                 - yyy
+E                 + two
+E           
+E           Drill down into differing attribute f:
+E             f: S(a=2, b='three') != S(a=3, b='three')
+E             
+E             Omitting 1 identical items, use -vv to show
+E             Differing attributes:
+E             ['a']
+E             
+E             Drill down into differing attribute a:
+E               a: 2 != 3
+E         
+E         Drill down into differing attribute j:
+E           j: 'left' != 'right'
+E           - right
+E           + left
+
+test_compare_recursive_dataclasses.py:44: AssertionError
+=========================== short test summary info ============================
+FAILED test_compare_recursive_dataclasses.py::test_recursive_dataclasses - As...
+============================== 1 failed in 0.01s ===============================
+______________ TestTruncateExplanation.test_full_output_truncated ______________
+
+self = <test_assertion.TestTruncateExplanation object at 0x7f236c0522f0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f23696e8190>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_full_output_truncated0')>
+
+    def test_full_output_truncated(self, monkeypatch, pytester: Pytester) -> None:
+        """Test against full runpytest() output."""
+    
+        line_count = 7
+        line_len = 100
+        expected_truncated_lines = 2
+        pytester.makepyfile(
+            r"""
+            def test_many_lines():
+                a = list([str(i)[0] * %d for i in range(%d)])
+                b = a[::2]
+                a = '\n'.join(map(str, a))
+                b = '\n'.join(map(str, b))
+                assert a == b
+        """
+            % (line_len, line_count)
+        )
+        monkeypatch.delenv("CI", raising=False)
+    
+        result = pytester.runpytest()
+        # without -vv, truncate the message showing a few diff lines only
+>       result.stdout.fnmatch_lines(
+            [
+                "*+ 1*",
+                "*+ 3*",
+                "*+ 5*",
+                "*truncated (%d lines hidden)*use*-vv*" % expected_truncated_lines,
+            ]
+        )
+E       Failed: nomatch: '*+ 1*'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_full_output_truncated0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_full_output_truncated.py F                                          [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '_______________________________ test_many_lines ________________________________'
+E           and: ''
+E           and: '    def test_many_lines():'
+E           and: '        a = list([str(i)[0] * 100 for i in range(7)])'
+E           and: '        b = a[::2]'
+E           and: "        a = '\\n'.join(map(str, a))"
+E           and: "        b = '\\n'.join(map(str, b))"
+E           and: '>       assert a == b'
+E           and: "E       AssertionError: assert '000000000000...6666666666666' == '000000000000...6666666666666'"
+E           and: 'E         Skipping 91 identical leading characters in diff, use -v to show'
+E           and: 'E           000000000'
+E       fnmatch: '*+ 1*'
+E          with: 'E         + 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
+E       nomatch: '*+ 3*'
+E           and: 'E           2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222'
+E       fnmatch: '*+ 3*'
+E          with: 'E         + 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333'
+E       nomatch: '*+ 5*'
+E           and: 'E           4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444'
+E       fnmatch: '*+ 5*'
+E          with: 'E         + 5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555'
+E       nomatch: '*truncated (2 lines hidden)*use*-vv*'
+E           and: 'E           6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666'
+E           and: ''
+E           and: 'test_full_output_truncated.py:6: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_full_output_truncated.py::test_many_lines - AssertionError: asser...'
+E           and: '============================== 1 failed in 0.01s ==============================='
+E       remains unmatched: '*truncated (2 lines hidden)*use*-vv*'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_assertion.py:1261: Failed
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_full_output_truncated0
+collected 1 item
+
+test_full_output_truncated.py F                                          [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_many_lines ________________________________
+
+    def test_many_lines():
+        a = list([str(i)[0] * 100 for i in range(7)])
+        b = a[::2]
+        a = '\n'.join(map(str, a))
+        b = '\n'.join(map(str, b))
+>       assert a == b
+E       AssertionError: assert '000000000000...6666666666666' == '000000000000...6666666666666'
+E         Skipping 91 identical leading characters in diff, use -v to show
+E           000000000
+E         + 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+E           2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+E         + 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+E           4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+E         + 5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+E           6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+
+test_full_output_truncated.py:6: AssertionError
+=========================== short test summary info ============================
+FAILED test_full_output_truncated.py::test_many_lines - AssertionError: asser...
+============================== 1 failed in 0.01s ===============================
+________________________________ test_color_yes ________________________________
+
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_color_yes0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+
+    def test_color_yes(pytester: Pytester, color_mapping) -> None:
+        p1 = pytester.makepyfile(
+            """
+            def fail():
+                assert 0
+    
+            def test_this():
+                fail()
+            """
+        )
+        result = pytester.runpytest("--color=yes", str(p1))
+>       result.stdout.fnmatch_lines(
+            color_mapping.format_for_fnmatch(
+                [
+                    "{bold}=*= test session starts =*={reset}",
+                    "collected 1 item",
+                    "",
+                    "test_color_yes.py {red}F{reset}{red} * [100%]{reset}",
+                    "",
+                    "=*= FAILURES =*=",
+                    "{red}{bold}_*_ test_this _*_{reset}",
+                    "",
+                    "    {kw}def{hl-reset} {function}test_this{hl-reset}():",
+                    ">       fail()",
+                    "",
+                    "{bold}{red}test_color_yes.py{reset}:5: ",
+                    "_ _ * _ _*",
+                    "",
+                    "    {kw}def{hl-reset} {function}fail{hl-reset}():",
+                    ">       {kw}assert{hl-reset} {number}0{hl-reset}",
+                    "{bold}{red}E       assert 0{reset}",
+                    "",
+                    "{bold}{red}test_color_yes.py{reset}:2: AssertionError",
+                    "{red}=*= {red}{bold}1 failed{reset}{red} in *s{reset}{red} =*={reset}",
+                ]
+            )
+        )
+E       Failed: fnmatch: '\x1b[[]1m=*= test session starts =*=\x1b[[]0m'
+E          with: '\x1b[1m============================= test session starts ==============================\x1b[0m'
+E       nomatch: 'collected 1 item'
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_color_yes0'
+E       exact match: 'collected 1 item'
+E       exact match: ''
+E       fnmatch: 'test_color_yes.py \x1b[[]31mF\x1b[[]0m\x1b[[]31m * [[]100%]\x1b[[]0m'
+E          with: 'test_color_yes.py \x1b[31mF\x1b[0m\x1b[31m                                                      [100%]\x1b[0m'
+E       exact match: ''
+E       fnmatch: '=*= FAILURES =*='
+E          with: '=================================== FAILURES ==================================='
+E       fnmatch: '\x1b[[]31m\x1b[[]1m_*_ test_this _*_\x1b[[]0m'
+E          with: '\x1b[31m\x1b[1m__________________________________ test_this ___________________________________\x1b[0m'
+E       exact match: ''
+E       nomatch: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_this\x1b[[]39;49;00m():'
+E           and: '    def test_this():'
+E           and: '>       fail()'
+E           and: ''
+E           and: '\x1b[1m\x1b[31mtest_color_yes.py\x1b[0m:5: '
+E           and: '_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ '
+E           and: ''
+E           and: '    def fail():'
+E           and: '>       assert 0'
+E           and: '\x1b[1m\x1b[31mE       assert 0\x1b[0m'
+E           and: ''
+E           and: '\x1b[1m\x1b[31mtest_color_yes.py\x1b[0m:2: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_color_yes.py::test_this - assert 0'
+E           and: '\x1b[31m============================== \x1b[31m\x1b[1m1 failed\x1b[0m\x1b[31m in 0.01s\x1b[0m\x1b[31m ===============================\x1b[0m'
+E       remains unmatched: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_this\x1b[[]39;49;00m():'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:1166: Failed
+----------------------------- Captured stdout call -----------------------------
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_color_yes0
+collected 1 item
+
+test_color_yes.py [31mF[0m[31m                                                      [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m__________________________________ test_this ___________________________________[0m
+
+    def test_this():
+>       fail()
+
+[1m[31mtest_color_yes.py[0m:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def fail():
+>       assert 0
+[1m[31mE       assert 0[0m
+
+[1m[31mtest_color_yes.py[0m:2: AssertionError
+=========================== short test summary info ============================
+FAILED test_color_yes.py::test_this - assert 0
+[31m============================== [31m[1m1 failed[0m[31m in 0.01s[0m[31m ===============================[0m
+_________________ TestCodeHighlight.test_code_highlight_simple _________________
+
+self = <test_terminal.TestCodeHighlight object at 0x7f236a75cbe0>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_code_highlight_simple0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+
+    def test_code_highlight_simple(self, pytester: Pytester, color_mapping) -> None:
+        pytester.makepyfile(
+            """
+            def test_foo():
+                assert 1 == 10
+        """
+        )
+        result = pytester.runpytest("--color=yes")
+>       result.stdout.fnmatch_lines(
+            color_mapping.format_for_fnmatch(
+                [
+                    "    {kw}def{hl-reset} {function}test_foo{hl-reset}():",
+                    ">       {kw}assert{hl-reset} {number}1{hl-reset} == {number}10{hl-reset}",
+                    "{bold}{red}E       assert 1 == 10{reset}",
+                ]
+            )
+        )
+E       Failed: nomatch: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+E           and: '\x1b[1m============================= test session starts ==============================\x1b[0m'
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_simple0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_code_highlight_simple.py \x1b[31mF\x1b[0m\x1b[31m                                          [100%]\x1b[0m'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '\x1b[31m\x1b[1m___________________________________ test_foo ___________________________________\x1b[0m'
+E           and: ''
+E           and: '    def test_foo():'
+E           and: '>       assert 1 == 10'
+E           and: '\x1b[1m\x1b[31mE       assert 1 == 10\x1b[0m'
+E           and: ''
+E           and: '\x1b[1m\x1b[31mtest_code_highlight_simple.py\x1b[0m:2: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_code_highlight_simple.py::test_foo - assert 1 == 10'
+E           and: '\x1b[31m============================== \x1b[31m\x1b[1m1 failed\x1b[0m\x1b[31m in 0.01s\x1b[0m\x1b[31m ===============================\x1b[0m'
+E       remains unmatched: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:2375: Failed
+----------------------------- Captured stdout call -----------------------------
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_simple0
+collected 1 item
+
+test_code_highlight_simple.py [31mF[0m[31m                                          [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_foo ___________________________________[0m
+
+    def test_foo():
+>       assert 1 == 10
+[1m[31mE       assert 1 == 10[0m
+
+[1m[31mtest_code_highlight_simple.py[0m:2: AssertionError
+=========================== short test summary info ============================
+FAILED test_code_highlight_simple.py::test_foo - assert 1 == 10
+[31m============================== [31m[1m1 failed[0m[31m in 0.01s[0m[31m ===============================[0m
+______________ TestCodeHighlight.test_code_highlight_continuation ______________
+
+self = <test_terminal.TestCodeHighlight object at 0x7f236a75e470>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_code_highlight_continuation0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+
+    def test_code_highlight_continuation(
+        self, pytester: Pytester, color_mapping
+    ) -> None:
+        pytester.makepyfile(
+            """
+            def test_foo():
+                print('''
+                '''); assert 0
+        """
+        )
+        result = pytester.runpytest("--color=yes")
+    
+>       result.stdout.fnmatch_lines(
+            color_mapping.format_for_fnmatch(
+                [
+                    "    {kw}def{hl-reset} {function}test_foo{hl-reset}():",
+                    "        {print}print{hl-reset}({str}'''{hl-reset}{str}{hl-reset}",
+                    ">   {str}    {hl-reset}{str}'''{hl-reset}); {kw}assert{hl-reset} {number}0{hl-reset}",
+                    "{bold}{red}E       assert 0{reset}",
+                ]
+            )
+        )
+E       Failed: nomatch: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+E           and: '\x1b[1m============================= test session starts ==============================\x1b[0m'
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_continuation0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_code_highlight_continuation.py \x1b[31mF\x1b[0m\x1b[31m                                    [100%]\x1b[0m'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '\x1b[31m\x1b[1m___________________________________ test_foo ___________________________________\x1b[0m'
+E           and: ''
+E           and: '    def test_foo():'
+E           and: "        print('''"
+E           and: ">       '''); assert 0"
+E           and: '\x1b[1m\x1b[31mE       assert 0\x1b[0m'
+E           and: ''
+E           and: '\x1b[1m\x1b[31mtest_code_highlight_continuation.py\x1b[0m:3: AssertionError'
+E           and: '----------------------------- Captured stdout call -----------------------------'
+E           and: ''
+E           and: '    '
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_code_highlight_continuation.py::test_foo - assert 0'
+E           and: '\x1b[31m============================== \x1b[31m\x1b[1m1 failed\x1b[0m\x1b[31m in 0.01s\x1b[0m\x1b[31m ===============================\x1b[0m'
+E       remains unmatched: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:2397: Failed
+----------------------------- Captured stdout call -----------------------------
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_continuation0
+collected 1 item
+
+test_code_highlight_continuation.py [31mF[0m[31m                                    [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_foo ___________________________________[0m
+
+    def test_foo():
+        print('''
+>       '''); assert 0
+[1m[31mE       assert 0[0m
+
+[1m[31mtest_code_highlight_continuation.py[0m:3: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+    
+=========================== short test summary info ============================
+FAILED test_code_highlight_continuation.py::test_foo - assert 0
+[31m============================== [31m[1m1 failed[0m[31m in 0.01s[0m[31m ===============================[0m
+______________ TestCodeHighlight.test_code_highlight_custom_theme ______________
+
+self = <test_terminal.TestCodeHighlight object at 0x7f236a75dea0>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_code_highlight_custom_theme0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f2362869b10>
+
+    def test_code_highlight_custom_theme(
+        self, pytester: Pytester, color_mapping, monkeypatch: MonkeyPatch
+    ) -> None:
+        pytester.makepyfile(
+            """
+            def test_foo():
+                assert 1 == 10
+        """
+        )
+        monkeypatch.setenv("PYTEST_THEME", "solarized-dark")
+        monkeypatch.setenv("PYTEST_THEME_MODE", "dark")
+        result = pytester.runpytest("--color=yes")
+>       result.stdout.fnmatch_lines(
+            color_mapping.format_for_fnmatch(
+                [
+                    "    {kw}def{hl-reset} {function}test_foo{hl-reset}():",
+                    ">       {kw}assert{hl-reset} {number}1{hl-reset} == {number}10{hl-reset}",
+                    "{bold}{red}E       assert 1 == 10{reset}",
+                ]
+            )
+        )
+E       Failed: nomatch: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+E           and: '\x1b[1m============================= test session starts ==============================\x1b[0m'
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_custom_theme0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_code_highlight_custom_theme.py \x1b[31mF\x1b[0m\x1b[31m                                    [100%]\x1b[0m'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '\x1b[31m\x1b[1m___________________________________ test_foo ___________________________________\x1b[0m'
+E           and: ''
+E           and: '    def test_foo():'
+E           and: '>       assert 1 == 10'
+E           and: '\x1b[1m\x1b[31mE       assert 1 == 10\x1b[0m'
+E           and: ''
+E           and: '\x1b[1m\x1b[31mtest_code_highlight_custom_theme.py\x1b[0m:2: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_code_highlight_custom_theme.py::test_foo - assert 1 == 10'
+E           and: '\x1b[31m============================== \x1b[31m\x1b[1m1 failed\x1b[0m\x1b[31m in 0.01s\x1b[0m\x1b[31m ===============================\x1b[0m'
+E       remains unmatched: '    \x1b[[]94mdef\x1b[[]39;49;00m \x1b[[]92mtest_foo\x1b[[]39;49;00m():'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:2420: Failed
+----------------------------- Captured stdout call -----------------------------
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_custom_theme0
+collected 1 item
+
+test_code_highlight_custom_theme.py [31mF[0m[31m                                    [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_foo ___________________________________[0m
+
+    def test_foo():
+>       assert 1 == 10
+[1m[31mE       assert 1 == 10[0m
+
+[1m[31mtest_code_highlight_custom_theme.py[0m:2: AssertionError
+=========================== short test summary info ============================
+FAILED test_code_highlight_custom_theme.py::test_foo - assert 1 == 10
+[31m============================== [31m[1m1 failed[0m[31m in 0.01s[0m[31m ===============================[0m
+______ TestImportHookInstallation.test_rewrite_assertions_pytester_plugin ______
+
+self = <test_assertion.TestImportHookInstallation object at 0x7f236bbcda50>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0')>
+
+    def test_rewrite_assertions_pytester_plugin(self, pytester: Pytester) -> None:
+        """
+        Assertions in the pytester plugin must also benefit from assertion
+        rewriting (#1920).
+        """
+        pytester.makepyfile(
+            """
+            pytest_plugins = ['pytester']
+            def test_dummy_failure(pytester):  # how meta!
+                pytester.makepyfile('def test(): assert 0')
+                r = pytester.inline_run()
+                r.assertoutcome(passed=1)
+        """
+        )
+        result = pytester.runpytest_subprocess()
+>       result.stdout.fnmatch_lines(
+            [
+                ">       r.assertoutcome(passed=1)",
+                "E       AssertionError: ([[][]], [[][]], [[]<TestReport *>[]])*",
+                "E       assert {'failed': 1,... 'skipped': 0} == {'failed': 0,... 'skipped': 0}",
+                "E         Omitting 1 identical items, use -vv to show",
+                "E         Differing items:",
+                "E         Use -v to get the full diff",
+            ]
+        )
+E       Failed: nomatch: '>       r.assertoutcome(passed=1)'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_rewrite_assertions_pytester_plugin.py F                             [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '______________________________ test_dummy_failure ______________________________'
+E           and: ''
+E           and: "pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/runpytest-0/test_dummy_failure0')>"
+E           and: ''
+E           and: '    def test_dummy_failure(pytester):  # how meta!'
+E           and: "        pytester.makepyfile('def test(): assert 0')"
+E           and: '        r = pytester.inline_run()'
+E       exact match: '>       r.assertoutcome(passed=1)'
+E       fnmatch: 'E       AssertionError: ([[][]], [[][]], [[]<TestReport *>[]])*'
+E          with: "E       AssertionError: ([], [], [<TestReport 'test_dummy_failure.py::test' when='call' outcome='failed'>])"
+E       exact match: "E       assert {'failed': 1,... 'skipped': 0} == {'failed': 0,... 'skipped': 0}"
+E       exact match: 'E         Omitting 1 identical items, use -vv to show'
+E       exact match: 'E         Differing items:'
+E       nomatch: 'E         Use -v to get the full diff'
+E           and: "E         {'passed': 0} != {'passed': 1}"
+E           and: "E         {'failed': 1} != {'failed': 0}"
+E           and: 'E         Full diff:'
+E           and: "E         - {'failed': 0, 'passed': 1, 'skipped': 0}"
+E           and: 'E         ?            ^            ^'
+E           and: "E         + {'failed': 1, 'passed': 0, 'skipped': 0}"
+E           and: 'E         ?            ^            ^'
+E           and: ''
+E           and: '/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/test_rewrite_assertions_pytester_plugin.py:5: AssertionError'
+E           and: '----------------------------- Captured stdout call -----------------------------'
+E           and: '============================= test session starts =============================='
+E           and: 'platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0'
+E           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/runpytest-0/test_dummy_failure0'
+E           and: 'collected 1 item'
+E           and: ''
+E           and: 'test_dummy_failure.py F                                                  [100%]'
+E           and: ''
+E           and: '=================================== FAILURES ==================================='
+E           and: '_____________________________________ test _____________________________________'
+E           and: ''
+E           and: '>   def test(): assert 0'
+E           and: 'E   assert 0'
+E           and: ''
+E           and: 'test_dummy_failure.py:1: AssertionError'
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_dummy_failure.py::test - assert 0'
+E           and: '============================== 1 failed in 0.02s ==============================='
+E           and: '=========================== short test summary info ============================'
+E           and: 'FAILED test_rewrite_assertions_pytester_plugin.py::test_dummy_failure - Asser...'
+E           and: '============================== 1 failed in 0.06s ==============================='
+E       remains unmatched: 'E         Use -v to get the full diff'
+
+/home/jenkins/agent/workspace/Pytest/testing/test_assertion.py:79: Failed
+----------------------------- Captured stdout call -----------------------------
+running: /usr/local/bin/python3 -mpytest --basetemp=/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/runpytest-0
+     in: /tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0
+collected 1 item
+
+test_rewrite_assertions_pytester_plugin.py F                             [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_dummy_failure ______________________________
+
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/runpytest-0/test_dummy_failure0')>
+
+    def test_dummy_failure(pytester):  # how meta!
+        pytester.makepyfile('def test(): assert 0')
+        r = pytester.inline_run()
+>       r.assertoutcome(passed=1)
+E       AssertionError: ([], [], [<TestReport 'test_dummy_failure.py::test' when='call' outcome='failed'>])
+E       assert {'failed': 1,... 'skipped': 0} == {'failed': 0,... 'skipped': 0}
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'passed': 0} != {'passed': 1}
+E         {'failed': 1} != {'failed': 0}
+E         Full diff:
+E         - {'failed': 0, 'passed': 1, 'skipped': 0}
+E         ?            ^            ^
+E         + {'failed': 1, 'passed': 0, 'skipped': 0}
+E         ?            ^            ^
+
+/tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/test_rewrite_assertions_pytester_plugin.py:5: AssertionError
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_rewrite_assertions_pytester_plugin0/runpytest-0/test_dummy_failure0
+collected 1 item
+
+test_dummy_failure.py F                                                  [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+>   def test(): assert 0
+E   assert 0
+
+test_dummy_failure.py:1: AssertionError
+=========================== short test summary info ============================
+FAILED test_dummy_failure.py::test - assert 0
+============================== 1 failed in 0.02s ===============================
+=========================== short test summary info ============================
+FAILED test_rewrite_assertions_pytester_plugin.py::test_dummy_failure - Asser...
+============================== 1 failed in 0.06s ===============================
+_____________ TestCodeHighlight.test_code_highlight_invalid_theme ______________
+
+self = <test_terminal.TestCodeHighlight object at 0x7f236a75c0a0>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f23618c47c0>
+
+    def test_code_highlight_invalid_theme(
+        self, pytester: Pytester, color_mapping, monkeypatch: MonkeyPatch
+    ) -> None:
+        pytester.makepyfile(
+            """
+            def test_foo():
+                assert 1 == 10
+        """
+        )
+        monkeypatch.setenv("PYTEST_THEME", "invalid")
+        result = pytester.runpytest_subprocess("--color=yes")
+>       result.stderr.fnmatch_lines(
+            "ERROR: PYTEST_THEME environment variable had an invalid value: 'invalid'. "
+            "Only valid pygment styles are allowed."
+        )
+E       Failed: remains unmatched: "ERROR: PYTEST_THEME environment variable had an invalid value: 'invalid'. Only valid pygment styles are allowed."
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:2441: Failed
+----------------------------- Captured stdout call -----------------------------
+running: /usr/local/bin/python3 -mpytest --basetemp=/tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme0/runpytest-0 --color=yes
+     in: /tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme0
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme0
+collected 1 item
+
+test_code_highlight_invalid_theme.py [31mF[0m[31m                                   [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_foo ___________________________________[0m
+
+    def test_foo():
+>       assert 1 == 10
+[1m[31mE       assert 1 == 10[0m
+
+[1m[31mtest_code_highlight_invalid_theme.py[0m:2: AssertionError
+=========================== short test summary info ============================
+FAILED test_code_highlight_invalid_theme.py::test_foo - assert 1 == 10
+[31m============================== [31m[1m1 failed[0m[31m in 0.02s[0m[31m ===============================[0m
+___________ TestCodeHighlight.test_code_highlight_invalid_theme_mode ___________
+
+self = <test_terminal.TestCodeHighlight object at 0x7f236a75dc30>
+pytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme_mode0')>
+color_mapping = <class 'conftest.color_mapping.<locals>.ColorMapping'>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f23621fac80>
+
+    def test_code_highlight_invalid_theme_mode(
+        self, pytester: Pytester, color_mapping, monkeypatch: MonkeyPatch
+    ) -> None:
+        pytester.makepyfile(
+            """
+            def test_foo():
+                assert 1 == 10
+        """
+        )
+        monkeypatch.setenv("PYTEST_THEME_MODE", "invalid")
+        result = pytester.runpytest_subprocess("--color=yes")
+>       result.stderr.fnmatch_lines(
+            "ERROR: PYTEST_THEME_MODE environment variable had an invalid value: 'invalid'. "
+            "The only allowed values are 'dark' and 'light'."
+        )
+E       Failed: remains unmatched: "ERROR: PYTEST_THEME_MODE environment variable had an invalid value: 'invalid'. The only allowed values are 'dark' and 'light'."
+
+/home/jenkins/agent/workspace/Pytest/testing/test_terminal.py:2457: Failed
+----------------------------- Captured stdout call -----------------------------
+running: /usr/local/bin/python3 -mpytest --basetemp=/tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme_mode0/runpytest-0 --color=yes
+     in: /tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme_mode0
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.1, pytest-7.1.0.dev70+g79dbd1978, pluggy-1.0.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_code_highlight_invalid_theme_mode0
+collected 1 item
+
+test_code_highlight_invalid_theme_mode.py [31mF[0m[31m                              [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_foo ___________________________________[0m
+
+    def test_foo():
+>       assert 1 == 10
+[1m[31mE       assert 1 == 10[0m
+
+[1m[31mtest_code_highlight_invalid_theme_mode.py[0m:2: AssertionError
+=========================== short test summary info ============================
+FAILED test_code_highlight_invalid_theme_mode.py::test_foo - assert 1 == 10
+[31m============================== [31m[1m1 failed[0m[31m in 0.02s[0m[31m ===============================[0m
+=========================== short test summary info ============================
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_bytes_diff_normal
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_iterable_full_diff[lists]
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_iterable_full_diff[dicts]
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_iterable_full_diff[sets]
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_dict_omitting
+FAILED testing/test_assertion.py::TestAssert_reprcompare_namedtuple::test_namedtuple
+FAILED testing/test_assertion.py::TestAssert_reprcompare_namedtuple::test_comparing_two_different_namedtuple
+FAILED testing/io/test_terminalwriter.py::test_code_highlight[with markup and code_highlight]
+FAILED testing/test_assertion.py::TestAssert_reprcompare::test_iterable_full_diff_ci
+FAILED testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_dataclasses
+FAILED testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_recursive_dataclasses
+FAILED testing/test_assertion.py::TestTruncateExplanation::test_full_output_truncated
+FAILED testing/test_terminal.py::test_color_yes - Failed: fnmatch: '\x1b[[]1m...
+FAILED testing/test_terminal.py::TestCodeHighlight::test_code_highlight_simple
+FAILED testing/test_terminal.py::TestCodeHighlight::test_code_highlight_continuation
+FAILED testing/test_terminal.py::TestCodeHighlight::test_code_highlight_custom_theme
+FAILED testing/test_assertion.py::TestImportHookInstallation::test_rewrite_assertions_pytester_plugin
+FAILED testing/test_terminal.py::TestCodeHighlight::test_code_highlight_invalid_theme
+FAILED testing/test_terminal.py::TestCodeHighlight::test_code_highlight_invalid_theme_mode
+===== 19 failed, 2987 passed, 116 skipped, 9 xfailed in 161.64s (0:02:41) ======
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
