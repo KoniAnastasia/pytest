@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+    kind: Pod
+    metadata:
+      name: jenkins-agent
+    spec:
+      containers:
+      - name: test
+        image: testenv:latest
+        imagePullPolicy: Never
+        command:
+        - cat
+        tty: true
+      restartPolicy: Never
+    """
+        }
+    }
+    stages {
+        stage('Checkout github repo') {
+            steps {
+                container ('test') {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], credentialsId: 'github_token',
+                         userRemoteConfigs: [[url: 'https://github.com/KoniAnastasia/pytest']]])
+                }
+            }
+        }
+        stage('Run tests') {
+            steps {
+                container ('test') {
+                    sh 'cd /home/jenkins/agent/workspace/Pytest'
+                    sh 'pip3 install git+https://github.com/pytest-dev/pytest'
+                    sh 'pip3 install hypothesis'
+                    sh 'pip3 install xmlschema'
+                    sh 'python3 -m pytest'
+                }
+            }
+        }
+    }
+}
